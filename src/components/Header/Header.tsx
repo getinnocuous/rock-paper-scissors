@@ -47,7 +47,7 @@ const ScoreContainer = styled.div`
     font-size: 16px;
     line-height: 19px;
     letter-spacing: 0.3rem;
-    color: #2a45c2;
+    color: ${({ theme }) => theme.color.navy};
     text-transform: uppercase;
   }
   p {
@@ -56,7 +56,7 @@ const ScoreContainer = styled.div`
     font-size: 64px;
     line-height: 64px;
     text-align: center;
-    color: #565468;
+    color: ${({ theme }) => theme.color.grey};
     margin: 0;
   }
 `;

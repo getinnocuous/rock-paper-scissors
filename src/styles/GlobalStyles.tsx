@@ -7,11 +7,13 @@ export const theme = {
     lg: '1024px',
   },
   color: {
-    lightblue: '#4664F4',
-    white: '#F5F6FA',
-    mustard: '#EB9F0E',
-    navy: '#2F3640',
-    red: '#DB2E4D',
+    lightblue: '#4664f4',
+    white: '#f5f6fa',
+    mustard: '#eb9f0e',
+    navy: '#2a45c2',
+    red: '#db2e4d',
+    icon: '#3b4262',
+    grey: '#565468',
   },
 };
 
@@ -31,7 +33,7 @@ export const GlobalStyle = createGlobalStyle`
 
   html {
     box-sizing: border-box;
-    background: radial-gradient(134.34% 134.34% at 50% 0%, #1F3757 0%, #131537 100%);
+    background: radial-gradient(134% 134% at 50% 0%, #1f3757 0%, #131537 100%);
     background-repeat: no-repeat;
   }
 

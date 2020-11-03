@@ -1,6 +1,6 @@
 import { Option } from '../components/OptionButton/Option.type';
 
-enum Result {
+export enum Result {
   Tied,
   User,
   House,
@@ -8,16 +8,16 @@ enum Result {
 
 export function checkResult(userChoice: Option, houseChoice: Option): Result {
   if (userChoice.name === houseChoice.name) {
-    console.log('Tied!');
+    // console.log('Tied!');
     return Result.Tied;
   } else if (userChoice.defeats === houseChoice.name) {
-    console.log('User wins!');
+    // console.log('User wins!');
     return Result.User;
   } else if (houseChoice.defeats === userChoice.name) {
-    console.log('House wins!');
+    // console.log('House wins!');
     return Result.House;
   } else {
-    console.log('Tied!');
+    // console.log('Tied!');
     return Result.Tied;
   }
 }

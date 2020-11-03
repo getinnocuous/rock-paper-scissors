@@ -52,7 +52,7 @@ const Button = styled.button<ButtonProps>`
       }
 
       &:focus {
-        outline-width: 3px;
+        outline-width: 0.3rem;
         outline-style: solid;
         outline-color: ${({ theme }) => theme.color.navy};
       }

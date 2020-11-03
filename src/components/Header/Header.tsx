@@ -44,8 +44,8 @@ const ScoreContainer = styled.div`
     display: block;
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
     letter-spacing: 0.3rem;
     color: ${({ theme }) => theme.color.navy};
     text-transform: uppercase;
@@ -53,8 +53,8 @@ const ScoreContainer = styled.div`
   p {
     font-style: normal;
     font-weight: bold;
-    font-size: 64px;
-    line-height: 64px;
+    font-size: 6.4rem;
+    line-height: 6.4rem;
     text-align: center;
     color: ${({ theme }) => theme.color.grey};
     margin: 0;

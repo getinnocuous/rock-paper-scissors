@@ -50,10 +50,13 @@ function App(): JSX.Element {
                 margin: 'auto',
               }}
             >
-              <OptionButton option={options[0]} />
-              <OptionButton option={options[1]} />
+              <OptionButton onClick={() => checkResult(options[0], options[getRandomInt(0, 2)])} option={options[0]} />
+              <OptionButton onClick={() => checkResult(options[1], options[getRandomInt(0, 2)])} option={options[1]} />
               <div style={{ gridColumn: '1 / span 2', display: 'flex', justifyContent: 'center' }}>
-                <OptionButton option={options[2]} />
+                <OptionButton
+                  onClick={() => checkResult(options[2], options[getRandomInt(0, 2)])}
+                  option={options[2]}
+                />
               </div>
             </div>
           </main>

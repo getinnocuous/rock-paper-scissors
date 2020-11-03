@@ -1,14 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Option } from './Option.type';
 import { handleColorType, handleIconType } from './util/util';
 
 interface OptionProps {
   option: Option;
+  onClick?: () => void;
 }
 
 interface ButtonProps {
   color: string;
+  onClick?: () => void;
 }
 
 const Button = styled.button<ButtonProps>`
@@ -42,27 +44,31 @@ const Button = styled.button<ButtonProps>`
     background: linear-gradient(0deg, #f3f3f3 0%, #dadada 100%);
   }
 
-  svg {
-    transition: transform 0.2s ease-in-out;
-  }
+  ${({ onClick }) =>
+    onClick &&
+    css`
+      svg {
+        transition: transform 0.2s ease-in-out;
+      }
 
-  &:focus {
-    outline-width: 3px;
-    outline-style: solid;
-    outline-color: ${({ theme }) => theme.color.navy};
-  }
+      &:focus {
+        outline-width: 3px;
+        outline-style: solid;
+        outline-color: ${({ theme }) => theme.color.navy};
+      }
 
-  &:active {
-    transform: scale(0.95);
-    outline: none;
-    svg {
-      transform: scale(0.85);
-    }
-  }
+      &:active {
+        transform: scale(0.95);
+        outline: none;
+        svg {
+          transform: scale(0.85);
+        }
+      }
+    `};
 `;
 
-export const OptionButton = ({ option }: OptionProps): JSX.Element => (
-  <Button color={handleColorType(option)}>
+export const OptionButton = ({ option, onClick }: OptionProps): JSX.Element => (
+  <Button onClick={onClick} color={handleColorType(option)}>
     <span>{handleIconType(option)}</span>
   </Button>
 );

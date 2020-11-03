@@ -1,7 +1,7 @@
 import React from 'react';
-import { createGlobalStyle, ThemeProvider } from 'styled-components/macro';
+import { createGlobalStyle, ThemeProvider as TP, DefaultTheme } from 'styled-components';
 
-export const theme = {
+export const theme: DefaultTheme = {
   breakpoints: {
     md: '660px',
     lg: '1024px',
@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
     --v-spacing: 1rem;
     --body:  'Barlow Semi Condensed', sans-serif;
     font-size: 62.5%;
-    @media screen and (min-width: ${theme.breakpoints.md})  {
+    @media screen and (min-width: ${({ theme }) => theme.breakpoints.md})  {
       --h-spacing: 8rem;
       --v-spacing: 4rem;
     }
@@ -52,7 +52,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: var(--body);
-    color: ${theme.color.white};
+    color: ${({ theme }) => theme.color.white};
     padding: var(--v-spacing) var(--h-spacing);
   }
 
@@ -66,4 +66,4 @@ type Props = {
   children?: JSX.Element;
 };
 
-export const Theme = ({ children }: Props): JSX.Element => <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+export const ThemeProvider = ({ children }: Props): JSX.Element => <TP theme={theme}>{children}</TP>;

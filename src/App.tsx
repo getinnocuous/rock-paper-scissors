@@ -1,10 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GlobalStyle, Theme } from './styles/GlobalStyles';
+import { GlobalStyle, ThemeProvider } from './styles/GlobalStyles';
 import { DocumentHead } from './components/DocumentHead/DocumentHead';
 import { Header } from './components/Header/Header';
 import { OptionButton } from './components/OptionButton/OptionButton';
 import { Option, Options } from './components/OptionButton/Option.type';
+import { checkResult } from './logic/checkResult';
+
+function getRandomInt(min: number, max: number): number {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 const options: Option[] = [
   {
@@ -28,10 +35,10 @@ const Container = styled.div`
 
 function App(): JSX.Element {
   return (
-    <>
-      <GlobalStyle />
-      <DocumentHead />
-      <Theme>
+    <ThemeProvider>
+      <>
+        <GlobalStyle />
+        <DocumentHead />
         <Container>
           <Header />
           <main style={{ display: 'flex', justifyContent: 'center' }}>
@@ -51,8 +58,8 @@ function App(): JSX.Element {
             </div>
           </main>
         </Container>
-      </Theme>
-    </>
+      </>
+    </ThemeProvider>
   );
 }
 

@@ -20,7 +20,6 @@ const ResultContainer = styled.section`
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr 1fr 1fr;
-    /* grid-gap: var(--v-spacing) calc(var(--h-spacing)); */
   }
 `;
 

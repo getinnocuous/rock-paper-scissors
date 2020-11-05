@@ -20,7 +20,7 @@ export const theme: DefaultTheme = {
 
 export const GlobalStyle = createGlobalStyle`
   :root {
-    --layout-max-width: 78rem;
+    --layout-max-width: 82rem;
     --h-spacing: 2rem;
     --v-spacing: 1rem;
     --body:  'Barlow Semi Condensed', sans-serif;

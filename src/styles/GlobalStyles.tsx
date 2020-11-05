@@ -3,6 +3,7 @@ import styled, { createGlobalStyle, ThemeProvider as TP, DefaultTheme } from 'st
 
 export const theme: DefaultTheme = {
   breakpoints: {
+    xs: '374px',
     md: '660px',
     lg: '1024px',
   },
@@ -24,6 +25,9 @@ export const GlobalStyle = createGlobalStyle`
     --v-spacing: 1rem;
     --body:  'Barlow Semi Condensed', sans-serif;
     font-size: 62.5%;
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.xs})  {
+      --h-spacing: 1rem;
+    }
     @media screen and (min-width: ${({ theme }) => theme.breakpoints.md})  {
       --h-spacing: 8rem;
       --v-spacing: 4rem;
@@ -34,6 +38,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     background: radial-gradient(134% 134% at 50% 0%, #1f3757 0%, #131537 100%);
     background-repeat: no-repeat;
+    height: 100%;
   }
 
   *, *:before, *:after {
@@ -44,7 +49,6 @@ export const GlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
-    height: 100%;
   }
 
   body {

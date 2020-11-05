@@ -10,16 +10,24 @@ import { Routes } from '../../routes/routes';
 
 const ResultContainer = styled.section`
   display: inline-grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: var(--v-spacing) calc(var(--h-spacing) / 2);
+  grid-template-columns: 1fr 1fr;
+  grid-gap: var(--v-spacing) calc(var(--h-spacing));
   margin: auto;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: 1fr 1fr 1fr;
+    /* grid-gap: var(--v-spacing) calc(var(--h-spacing)); */
+  }
 `;
 
 const PlayerTitle = styled.h2`
   font-style: normal;
   font-weight: bold;
   font-size: 1.5rem;
-  line-height: 3.2rem;
   letter-spacing: 0.3rem;
   color: ${({ theme }) => theme.color.white};
   text-shadow: 0px 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
@@ -34,7 +42,7 @@ const PlayerTitle = styled.h2`
 
 const PlayAgainButton = styled.button`
   display: block;
-  padding: 1rem;
+  padding: 2rem;
   border: none;
   background: ${({ theme }) => theme.color.white};
   border-radius: 1rem;
@@ -49,11 +57,10 @@ const PlayAgainButton = styled.button`
   font-size: 1.4rem;
   cursor: pointer;
   width: 100%;
+  max-width: 22rem;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 2rem;
     font-size: 1.6rem;
-    max-width: 22rem;
   }
 `;
 
@@ -66,6 +73,16 @@ const ResultText = styled.h2`
   color: ${({ theme }) => theme.color.white};
   text-shadow: 0px 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
   text-transform: uppercase;
+  margin: 0 0 calc(var(--v-spacing) * 2);
+`;
+
+const AttentionGrabberContainer = styled.div`
+  grid-row: 2;
+  grid-column: 1 / span 2;
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-row: auto;
+    grid-column: auto;
+  }
 `;
 
 interface ResultProps {
@@ -119,13 +136,13 @@ export const Result = ({
         {userChoice && <OptionButton option={userChoice} />}
       </div>
       {winner !== null ? (
-        <div>
+        <AttentionGrabberContainer>
           <ResultText>{getResultText(winner)}</ResultText>
           <PlayAgainButton onClick={handlePlayAgain}>Play again</PlayAgainButton>
-        </div>
+        </AttentionGrabberContainer>
       ) : null}
       <div>
-        <PlayerTitle>The House Picked</PlayerTitle>
+        <PlayerTitle>House Picked</PlayerTitle>
         <OptionButton option={houseChoice} />
       </div>
     </ResultContainer>

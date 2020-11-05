@@ -1,12 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { Option } from './Option.type';
 import { handleColorType, handleIconType } from './util/util';
-
-interface OptionProps {
-  option: Option;
-  onClick?: () => void;
-}
 
 interface ButtonProps {
   color: string;
@@ -67,8 +63,23 @@ const Button = styled.button<ButtonProps>`
     `};
 `;
 
-export const OptionButton = ({ option, onClick }: OptionProps): JSX.Element => (
-  <Button onClick={onClick} color={handleColorType(option)}>
-    <span>{handleIconType(option)}</span>
-  </Button>
-);
+interface OptionProps {
+  option: Option;
+  onClick?: () => void;
+}
+
+export const OptionButton = ({ option, onClick }: OptionProps): JSX.Element => {
+  const history = useHistory();
+  const handleClick = () => {
+    if (onClick !== undefined) {
+      onClick();
+    }
+    history.push('/result');
+  };
+
+  return (
+    <Button onClick={onClick ? handleClick : undefined} color={handleColorType(option)}>
+      <span>{handleIconType(option)}</span>
+    </Button>
+  );
+};

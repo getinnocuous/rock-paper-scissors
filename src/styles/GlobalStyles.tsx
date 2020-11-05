@@ -1,5 +1,5 @@
 import React from 'react';
-import { createGlobalStyle, ThemeProvider as TP, DefaultTheme } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider as TP, DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
   breakpoints: {
@@ -12,7 +12,7 @@ export const theme: DefaultTheme = {
     mustard: '#eb9f0e',
     navy: '#2a45c2',
     red: '#db2e4d',
-    icon: '#3b4262',
+    darkBlue: '#3b4262',
     grey: '#565468',
   },
 };
@@ -20,7 +20,6 @@ export const theme: DefaultTheme = {
 export const GlobalStyle = createGlobalStyle`
   :root {
     --layout-max-width: 78rem;
-    --content-max-width: 48rem;
     --h-spacing: 2rem;
     --v-spacing: 1rem;
     --body:  'Barlow Semi Condensed', sans-serif;
@@ -60,6 +59,16 @@ export const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
   }
+
+  main {
+    display: flex;
+    justify-content: center;
+  }
+`;
+
+export const Container = styled.div`
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
 `;
 
 type Props = {

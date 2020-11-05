@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { OptionButton } from '../../components/OptionButton/OptionButton';
 import { Option } from '../../components/OptionButton/Option.type';
 import { Result as eResult, checkResult } from '../../logic/checkResult';
+import { getResultText } from '../../util/util';
+
+const ResultContainer = styled.section`
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: var(--v-spacing) calc(var(--h-spacing) / 2);
+  margin: auto;
+`;
 
 const PlayerTitle = styled.h2`
   font-style: normal;
@@ -22,35 +29,55 @@ const PlayerTitle = styled.h2`
   }
 `;
 
+const PlayAgainButton = styled.button`
+  display: block;
+  padding: 1rem;
+  border: none;
+  background: ${({ theme }) => theme.color.white};
+  border-radius: 1rem;
+  text-align: center;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.25rem;
+  color: ${({ theme }) => theme.color.darkBlue};
+  margin: auto;
+  font-size: 1.4rem;
+  cursor: pointer;
+
+  @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 2rem;
+    font-size: 1.6rem;
+  }
+`;
+
+const ResultText = styled.h2`
+  font-size: 5.6rem;
+  line-height: 6.8rem;
+  font-style: normal;
+  font-weight: bold;
+  text-align: center;
+  color: ${({ theme }) => theme.color.white};
+  text-shadow: 0px 0.3rem 0.3rem rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+`;
+
 interface ResultProps {
-  playersChoice: {
-    user: Option | null;
-    house: Option;
-  };
+  userChoice: Option | null;
+  houseChoice: Option;
   setScore: React.Dispatch<React.SetStateAction<number>>;
   score: number;
+  setUserChoice: React.Dispatch<React.SetStateAction<Option | null>>;
+  setHouseChoice: React.Dispatch<React.SetStateAction<Option>>;
 }
 
-const getResultText = (result: eResult): string => {
-  switch (result) {
-    case eResult.User:
-      return 'You win';
-    case eResult.House:
-      return 'You lose';
-    case eResult.Tied:
-      return 'Tied';
-    default:
-      return '';
-  }
-};
-
-export const Result = ({ playersChoice, score, setScore }: ResultProps): JSX.Element => {
-  const { user, house } = playersChoice;
+export const Result = ({ userChoice, houseChoice, score, setScore }: ResultProps): JSX.Element => {
   const [winner, setWinner] = useState<eResult | null>(null);
 
   useEffect(() => {
-    if (user) {
-      const result = checkResult(user, house);
+    if (userChoice) {
+      const result = checkResult(userChoice, houseChoice);
       setWinner(result);
       switch (result) {
         case eResult.User:
@@ -67,47 +94,21 @@ export const Result = ({ playersChoice, score, setScore }: ResultProps): JSX.Ele
   }, []);
 
   return (
-    <section>
-      <main style={{ display: 'flex', justifyContent: 'center' }}>
-        <div
-          style={{
-            display: 'inline-grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gridGap: 'var(--v-spacing) var(--h-spacing)',
-            margin: 'auto',
-          }}
-        >
-          <div>
-            <PlayerTitle>You Picked</PlayerTitle>
-            {user && <OptionButton option={user} />}
-          </div>
-          {winner !== null ? (
-            <div>
-              <h1 style={{ fontSize: '5.4rem', textAlign: 'center', textTransform: 'uppercase' }}>
-                {getResultText(winner)}
-              </h1>
-              <Link
-                style={{
-                  display: 'block',
-                  padding: '2rem',
-                  background: '#fff',
-                  borderRadius: '1rem',
-                  textAlign: 'center',
-                  color: 'black',
-                  fontSize: '2rem',
-                }}
-                to={'/'}
-              >
-                Play again
-              </Link>
-            </div>
-          ) : null}
-          <div>
-            <PlayerTitle>The House Picked</PlayerTitle>
-            <OptionButton option={house} />
-          </div>
+    <ResultContainer>
+      <div>
+        <PlayerTitle>You Picked</PlayerTitle>
+        {userChoice && <OptionButton option={userChoice} />}
+      </div>
+      {winner !== null ? (
+        <div>
+          <ResultText>{getResultText(winner)}</ResultText>
+          <PlayAgainButton>Play again</PlayAgainButton>
         </div>
-      </main>
-    </section>
+      ) : null}
+      <div>
+        <PlayerTitle>The House Picked</PlayerTitle>
+        <OptionButton option={houseChoice} />
+      </div>
+    </ResultContainer>
   );
 };

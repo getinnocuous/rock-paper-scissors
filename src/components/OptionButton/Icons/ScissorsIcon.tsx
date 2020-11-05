@@ -5,7 +5,7 @@ const ScissorsSVG = styled.svg`
   width: 5.2rem;
   height: 4.4rem;
   path {
-    fill: ${({ theme }) => theme.color.icon};
+    fill: ${({ theme }) => theme.color.darkBlue};
   }
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {
     width: 6.7rem;

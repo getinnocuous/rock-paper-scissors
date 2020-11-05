@@ -61,7 +61,11 @@ const ScoreContainer = styled.div`
   }
 `;
 
-export const Header = (): JSX.Element => (
+interface HeaderProps {
+  score: number;
+}
+
+export const Header = ({ score }: HeaderProps): JSX.Element => (
   <HeaderContainer>
     <Title>
       Rock
@@ -72,7 +76,7 @@ export const Header = (): JSX.Element => (
     </Title>
     <ScoreContainer>
       <span>Score</span>
-      <p>0</p>
+      <p>{score}</p>
     </ScoreContainer>
   </HeaderContainer>
 );

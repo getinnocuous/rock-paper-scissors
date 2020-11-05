@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { Option } from './Option.type';
 import { handleColorType, handleIconType } from './util/util';
-
+import { Routes } from '../../routes/routes';
 interface ButtonProps {
   color: string;
   onClick?: () => void;
@@ -43,6 +43,7 @@ const Button = styled.button<ButtonProps>`
   ${({ onClick }) =>
     onClick &&
     css`
+      cursor: pointer;
       svg {
         transition: transform 0.2s ease-in-out;
       }
@@ -74,7 +75,7 @@ export const OptionButton = ({ option, onClick }: OptionProps): JSX.Element => {
     if (onClick !== undefined) {
       onClick();
     }
-    history.push('/result');
+    history.push(Routes.Results);
   };
 
   return (

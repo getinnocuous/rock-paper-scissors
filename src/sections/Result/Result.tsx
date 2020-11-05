@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { OptionButton } from '../../components/OptionButton/OptionButton';
 import { Option } from '../../components/OptionButton/Option.type';
 import { Result as eResult, checkResult } from '../../logic/checkResult';
-import { getResultText } from '../../util/util';
+import { getRandomInt, getResultText } from '../../util/util';
+import { options } from '../../data/data';
+import { useHistory } from 'react-router-dom';
+import { Routes } from '../../routes/routes';
 
 const ResultContainer = styled.section`
   display: inline-grid;
@@ -45,10 +48,12 @@ const PlayAgainButton = styled.button`
   margin: auto;
   font-size: 1.4rem;
   cursor: pointer;
+  width: 100%;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.md}) {
     padding: 2rem;
     font-size: 1.6rem;
+    max-width: 22rem;
   }
 `;
 
@@ -72,8 +77,22 @@ interface ResultProps {
   setHouseChoice: React.Dispatch<React.SetStateAction<Option>>;
 }
 
-export const Result = ({ userChoice, houseChoice, score, setScore }: ResultProps): JSX.Element => {
+export const Result = ({
+  userChoice,
+  setUserChoice,
+  houseChoice,
+  setHouseChoice,
+  score,
+  setScore,
+}: ResultProps): JSX.Element => {
   const [winner, setWinner] = useState<eResult | null>(null);
+  const history = useHistory();
+
+  const handlePlayAgain = () => {
+    setUserChoice(null);
+    setHouseChoice(options[getRandomInt(0, options.length - 1)]);
+    history.push(Routes.Game);
+  };
 
   useEffect(() => {
     if (userChoice) {
@@ -102,7 +121,7 @@ export const Result = ({ userChoice, houseChoice, score, setScore }: ResultProps
       {winner !== null ? (
         <div>
           <ResultText>{getResultText(winner)}</ResultText>
-          <PlayAgainButton>Play again</PlayAgainButton>
+          <PlayAgainButton onClick={handlePlayAgain}>Play again</PlayAgainButton>
         </div>
       ) : null}
       <div>

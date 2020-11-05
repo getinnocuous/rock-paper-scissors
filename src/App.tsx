@@ -8,6 +8,7 @@ import { Game } from './sections/Game/Game';
 import { Result } from './sections/Result/Result';
 import { getRandomInt } from './util/util';
 import { options } from './data/data';
+import { Routes } from './routes/routes';
 
 function App(): JSX.Element {
   const [houseChoice, setHouseChoice] = useState<Option>(options[getRandomInt(0, options.length - 1)]);
@@ -24,7 +25,7 @@ function App(): JSX.Element {
           <main>
             <Switch>
               {userChoice && (
-                <Route path="/result">
+                <Route path={Routes.Results}>
                   <Result
                     score={score}
                     setScore={setScore}
@@ -35,10 +36,10 @@ function App(): JSX.Element {
                   />
                 </Route>
               )}
-              <Route exact path="/">
+              <Route exact path={Routes.Game}>
                 <Game setUserChoice={setUserChoice} />
               </Route>
-              <Redirect to="/" /> {/* catch all non-routes */}
+              <Redirect to={Routes.Game} /> {/* catch all non-routes */}
             </Switch>
           </main>
         </Container>

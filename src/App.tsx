@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import { GlobalStyle, ThemeProvider, Container } from './styles/GlobalStyles';
 import { DocumentHead } from './components/DocumentHead/DocumentHead';
 import { Header } from './components/Header/Header';
@@ -9,6 +9,7 @@ import { Result } from './sections/Result/Result';
 import { getRandomInt } from './util/util';
 import { options } from './data/data';
 import { Routes } from './routes/routes';
+import { AnimatedRoutes, RouteTransition } from './components/animation/RouteTransition';
 
 function App(): JSX.Element {
   const [houseChoice, setHouseChoice] = useState<Option>(options[getRandomInt(0, options.length - 1)]);
@@ -23,9 +24,9 @@ function App(): JSX.Element {
         <Container>
           <Header score={score} />
           <main>
-            <Switch>
+            <AnimatedRoutes exitBeforeEnter initial={true}>
               {userChoice && (
-                <Route path={Routes.Results}>
+                <RouteTransition path={Routes.Results}>
                   <Result
                     score={score}
                     setScore={setScore}
@@ -34,13 +35,13 @@ function App(): JSX.Element {
                     setUserChoice={setUserChoice}
                     setHouseChoice={setHouseChoice}
                   />
-                </Route>
+                </RouteTransition>
               )}
-              <Route exact path={Routes.Game}>
+              <RouteTransition exact path={Routes.Game} slideUp={20}>
                 <Game setUserChoice={setUserChoice} />
-              </Route>
+              </RouteTransition>
               <Redirect to={Routes.Game} /> {/* catch all non-routes */}
-            </Switch>
+            </AnimatedRoutes>
           </main>
         </Container>
       </Router>

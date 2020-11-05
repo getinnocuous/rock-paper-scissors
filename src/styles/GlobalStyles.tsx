@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled, { createGlobalStyle, ThemeProvider as TP, DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
@@ -79,4 +79,4 @@ type Props = {
   children?: JSX.Element;
 };
 
-export const ThemeProvider = ({ children }: Props): JSX.Element => <TP theme={theme}>{children}</TP>;
+export const ThemeProvider: FC<Props> = ({ children }): JSX.Element => <TP theme={theme}>{children}</TP>;

@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { OptionButton } from '../../components/OptionButton/OptionButton';
 import { Option } from '../../components/OptionButton/Option.type';
 import { Result as eResult, checkResult } from '../../logic/checkResult';
-import { getRandomInt, getResultText } from '../../util/util';
-import { options } from '../../data/data';
+import { getRandomOption, getResultText } from '../../util/util';
 import { useHistory } from 'react-router-dom';
 import { Routes } from '../../routes/routes';
 
@@ -106,7 +105,7 @@ export const Result = ({
 
   const handlePlayAgain = () => {
     setUserChoice(null);
-    setHouseChoice(options[getRandomInt(0, options.length - 1)]);
+    setHouseChoice(getRandomOption());
     history.push(Routes.Game);
   };
 

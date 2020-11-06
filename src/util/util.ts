@@ -1,4 +1,6 @@
 import { Result } from '../logic/checkResult';
+import { Option } from '../components/OptionButton/Option.type';
+import { options } from './../data/data';
 
 export const getRandomInt = (min: number, max: number): number => {
   min = Math.ceil(min);
@@ -17,4 +19,8 @@ export const getResultText = (result: Result): string => {
     default:
       return '';
   }
+};
+
+export const getRandomOption = (): Option => {
+  return options[getRandomInt(0, options.length - 1)];
 };

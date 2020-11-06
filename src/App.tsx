@@ -6,13 +6,12 @@ import { Header } from './components/Header/Header';
 import { Option } from './components/OptionButton/Option.type';
 import { Game } from './sections/Game/Game';
 import { Result } from './sections/Result/Result';
-import { getRandomInt } from './util/util';
-import { options } from './data/data';
+import { getRandomOption } from './util/util';
 import { Routes } from './routes/routes';
 import { AnimatedRoutes, RouteTransition } from './components/animation/RouteTransition';
 
 function App(): JSX.Element {
-  const [houseChoice, setHouseChoice] = useState<Option>(options[getRandomInt(0, options.length - 1)]);
+  const [houseChoice, setHouseChoice] = useState<Option>(getRandomOption());
   const [userChoice, setUserChoice] = useState<Option | null>(null);
   const [score, setScore] = useState<number>(0);
 

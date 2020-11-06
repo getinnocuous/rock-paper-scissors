@@ -36,7 +36,6 @@ const Button = styled.button<ButtonProps>`
     width: 100%;
     height: 100%;
     border-radius: 100%;
-    clip-path: circle(50% at 50% calc(50% + 0.5rem));
     background: linear-gradient(0deg, #f3f3f3 0%, #dadada 100%);
   }
 

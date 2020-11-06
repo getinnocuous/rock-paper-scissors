@@ -22,12 +22,12 @@ const Button = styled.button<ButtonProps>`
   height: var(--size);
   border-radius: 100%;
   border: solid var(--border-width) ${({ color }) => color};
-  background: #babfd4;
   transition: transform 0.2s ease-in-out;
   padding: 0;
   margin: 0;
   outline: none;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(0deg, #f3f3f3 0%, #dadada 100%);
 
   span {
     display: flex;
@@ -35,8 +35,6 @@ const Button = styled.button<ButtonProps>`
     align-items: center;
     width: 100%;
     height: 100%;
-    border-radius: 100%;
-    background: linear-gradient(0deg, #f3f3f3 0%, #dadada 100%);
   }
 
   ${({ onClick }) =>
